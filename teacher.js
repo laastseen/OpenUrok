@@ -1,4 +1,4 @@
-import {state, initSupabase, demoDb, activities, getActivity, RoleLabels, toast, escapeHtml, csvDownload, config} from './core.js';
+const {state, initSupabase, demoDb, activities, getActivity, RoleLabels, toast, escapeHtml, csvDownload, config} = window.AICourtCore;
 const $=s=>document.querySelector(s);
 let timer=null; let snapshot=null;
 

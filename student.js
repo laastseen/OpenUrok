@@ -1,4 +1,4 @@
-import {state, initSupabase, demoDb, getActivity, activities, RoleLabels, RoleClass, toast, escapeHtml, rolePrompt, config} from './core.js';
+const {state, initSupabase, demoDb, getActivity, activities, RoleLabels, RoleClass, toast, escapeHtml, rolePrompt, config} = window.AICourtCore;
 
 const $=s=>document.querySelector(s);
 let refreshTimer=null;
@@ -77,11 +77,28 @@ function renderSteps(){
 
 function startRefresh(){ clearInterval(refreshTimer); refresh(); refreshTimer=setInterval(refresh,1400); }
 
+let lastActivityId=null;
+
+function isEditingActivity(){
+  const el=document.activeElement;
+  if(!el || !el.closest || !el.closest('#activityRoot')) return false;
+  return ['TEXTAREA','INPUT','SELECT'].includes(el.tagName) || el.isContentEditable;
+}
+
 async function refresh(){
   try{
     if(state.demo){ state.session=demoDb().raw.session; }
     else { const {data,error}=await state.client.rpc('get_session_state',{p_code:state.session.code}); if(error) throw error; state.session=data; }
-    renderActivity(getActivity(state.session.current_activity));
+    const activity=getActivity(state.session.current_activity);
+
+    // Court/commission screens are refreshed periodically so teammates' answers appear live.
+    // Do not rebuild the DOM while the student is typing: replacing innerHTML would
+    // recreate the textarea and wipe an unsaved draft. A teacher switching to another
+    // activity still takes priority and changes the screen immediately.
+    if(activity.id===lastActivityId && isEditingActivity()) return;
+
+    lastActivityId=activity.id;
+    await renderActivity(activity);
   }catch(e){ console.warn(e); }
 }
 
