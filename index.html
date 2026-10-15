@@ -1,0 +1,16 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#070816"><title>AI Court — Человек против ИИ</title><link rel="stylesheet" href="styles.css"><link rel="icon" href="assets/favicon.svg"></head><body>
+<main id="landing" class="app-shell">
+  <header class="topbar"><div class="brand"><div class="brand-mark"></div><div>AI COURT<small>interactive lesson system</small></div></div><a class="status-pill" href="teacher.html">Панель судьи</a></header>
+  <section class="hero">
+    <div><div class="eyebrow">Дело № AI-01 · 4 курс · программирование</div><h1><span class="gradient-text">Человек против ИИ.</span><br>Кому доверить решение?</h1><p>Вы становитесь участником судебного процесса над искусственным интеллектом. Ваша группа рассмотрит доказательства, проверит рабочие ситуации программиста и вынесет собственный вердикт.</p>
+      <form id="joinForm" class="card join-card"><div class="form-grid"><div class="field"><label>Код заседания</label><input id="sessionCode" class="input" maxlength="12" required></div><div class="field"><label>Ваше имя / псевдоним</label><input id="nickname" class="input" maxlength="30" placeholder="Например: Саша" required></div><div class="field full"><label>Номер вашей физической группы (необязательно)</label><select id="groupNo" class="select"><option value="">Распределить автоматически</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div></div><button class="btn btn-primary btn-wide" style="margin-top:16px">Войти в заседание</button><div class="notice">Роль внутри группы закрепится после входа и останется вашей на весь урок.</div></form>
+    </div>
+    <div class="hero-visual"><div class="hero-card"><img src="assets/hero-loop.gif" alt="Программист и искусственный интеллект"></div><div class="hero-float a"><b>LIVE EVIDENCE</b><span>ответы и статистика группы</span></div><div class="hero-float b"><b>FIXED ROLE</b><span>обвинитель · защитник · эксперт</span></div></div>
+  </section>
+</main>
+
+<main id="studentApp" class="app-shell hidden"><header class="topbar"><div class="brand"><div class="brand-mark"></div><div>AI COURT<small>student mode</small></div></div><div id="connectionStatus" class="status-pill live">CASE</div></header><div class="workspace">
+  <aside class="card side"><div class="profile"><div id="profileName" class="profile-name"></div><div class="meta"><span id="groupTag" class="tag"></span><span id="roleTag" class="tag"></span></div><p id="roleExplain" style="color:var(--muted);font-size:12px;line-height:1.5;margin-bottom:0"></p></div><div id="steps" class="step-list"></div></aside>
+  <section id="activityRoot" class="card main-panel"></section>
+</div></main>
+<script src="config.js"></script><script src="activities.js"></script><script type="module" src="student.js"></script></body></html>
